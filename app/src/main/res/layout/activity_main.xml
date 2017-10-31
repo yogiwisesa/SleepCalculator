@@ -5,65 +5,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:padding="16dp"
+    android:orientation="vertical"
     tools:context="com.yogiw.sleepcalculator.MainActivity">
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/colorPrimary">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <android.support.v7.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
+            app:cardUseCompatPadding="true"
+            app:cardBackgroundColor="@color/colorPrimary">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical"
+                android:padding="8dp">
 
-                <RadioGroup
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-
-                    <RadioButton
-                        android:layout_width="0dp"
+                    <RadioGroup
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:text="I want to sleep at"
-                        android:textColor="@color/colorFont"
-                        android:checked="true"/>
+                        android:orientation="horizontal">
 
-                    <RadioButton
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.5"
-                        android:text="I want to wake up at"
-                        android:textColor="@color/colorFont" />
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:text="@string/i_want_to_sleep_at"
+                            android:textColor="@color/colorFont"
+                            android:id="@+id/rbSleep"/>
 
+                        <RadioButton
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:text="@string/i_want_to_wake_up_at"
+                            android:textColor="@color/colorFont"
+                            android:id="@+id/rbWakeup"/>
 
-                </RadioGroup>
+                    </RadioGroup>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/defaulttime"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorFont"
+                    android:textSize="50sp" />
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/tvTime"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="00:00"
-                android:textAlignment="center"
-                android:textColor="@color/colorFont"
-                android:textSize="50sp" />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvTime"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/timeitem">
 
     </android.support.v7.widget.RecyclerView>
 </LinearLayout>

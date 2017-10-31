@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.RadioButton;
 
 public class Splashscreen extends AppCompatActivity {
 
@@ -19,7 +20,7 @@ public class Splashscreen extends AppCompatActivity {
             }
         }, 300);
 
-
+        RadioButton rb;
 
     }
 }

@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">SleepCalculator</string>
+    <string name="i_want_to_sleep_at">I want to sleep at</string>
+    <string name="i_want_to_wake_up_at">I want to wake up at</string>
+    <string name="defaulttime">00:00</string>
 </resources>

@@ -8,5 +8,6 @@ data class TimeClass(
         var Minute: Int,
         var durHour: Int = 0,
         var durMinute: Int = 0,
-        var cycles: Int = 0
+        var cycles: Int = 0,
+        var wakeup: Boolean = true
 )
