@@ -16,7 +16,7 @@ class Splashscreen : AppCompatActivity() {
         Handler().postDelayed({
 
             val first = FirsttimePref.load(this)
-            Log.i("Yogi", "" + first!!)
+
             var i :Intent
             if (first != null) {
                  i = Intent(application, MainActivity::class.java)
