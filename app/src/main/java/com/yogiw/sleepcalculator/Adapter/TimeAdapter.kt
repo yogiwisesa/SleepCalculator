@@ -1,10 +1,7 @@
-package com.yogiw.sleepcalculator
+package com.yogiw.sleepcalculator.Adapter
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
-import android.media.Image
 import android.provider.AlarmClock
 import android.support.v7.widget.RecyclerView
 import android.util.Log
@@ -13,6 +10,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.yogiw.sleepcalculator.Model.TimeClass
+import com.yogiw.sleepcalculator.R
 
 /**
  * Created by Yogi Wisesa on 10/30/2017.

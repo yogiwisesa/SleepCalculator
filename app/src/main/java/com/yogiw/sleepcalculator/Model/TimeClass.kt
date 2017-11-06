@@ -1,4 +1,4 @@
-package com.yogiw.sleepcalculator
+package com.yogiw.sleepcalculator.Model
 
 /**
  * Created by Yogi Wisesa on 10/30/2017.

@@ -5,4 +5,9 @@
     <color name="colorAccent">#637CE7</color>
     <color name="colorFont">#6D6F7E</color>
     <color name="colorFontRecommend">#6da67c</color>
+    <color name="colorWhite">#FFF</color>
+    <!-- dots inactive colors -->
+    <color name="colorDotinactive">#FAD107</color>
+    <!-- dots active colors -->
+    <color name="colorDotactive">#9e7a0f</color>
 </resources>
