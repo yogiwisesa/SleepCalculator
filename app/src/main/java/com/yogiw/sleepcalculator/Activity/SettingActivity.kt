@@ -33,7 +33,7 @@ class SettingActivity : AppCompatActivity() {
 
         var listSetting: ArrayList<SettingClass> = ArrayList()
 
-        listSetting.add(SettingClass("24 hours Mode", "Time in 24hours format instead of AM/PM", am))
+        listSetting.add(SettingClass("AM/ PM Mode", "Time in AM/PM format instead of 24 hours", am))
         listSetting.add(SettingClass("Sleep cycle Duration", "Average people's sleep cycle: 90min", cyclerdur))
         listSetting.add(SettingClass("Time you takes to fall asleep", "Most people need about 15minutes to fall asleep", timetosleep))
 

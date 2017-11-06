@@ -12,11 +12,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.yogiw.sleepcalculator.Model.TimeClass
 import com.yogiw.sleepcalculator.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 /**
  * Created by Yogi Wisesa on 10/30/2017.
  */
-class TimeAdapter(var context: Context?, var list: List<TimeClass>?) : RecyclerView.Adapter<TimeAdapter.ViewHolder>() {
+class TimeAdapter(var context: Context?, var list: List<TimeClass>?, var am: Int) : RecyclerView.Adapter<TimeAdapter.ViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
@@ -34,7 +35,18 @@ class TimeAdapter(var context: Context?, var list: List<TimeClass>?) : RecyclerV
         val wakeup = list!!.get(position).wakeup
         Log.i("adapter",""+ hour)
 
-        holder!!.tvTime.text = "${String.format("%02d", hour)}:${String.format("%02d", min)}" // format to 2 digits of string
+
+        if (am ==1){
+            if (hour > 12){
+                var mHour = hour -12
+                holder!!.tvTime.text  = "${String.format("%02d", mHour)}:${String.format("%02d", min)} PM"
+            } else {
+                holder!!.tvTime.text  = "${String.format("%02d", hour)}:${String.format("%02d", min)} AM"
+            }
+        } else {
+            holder!!.tvTime.text = "${String.format("%02d", hour)}:${String.format("%02d", min)}"
+        }
+
         if (min > 0) {
             if (hour > 1) {
                 if (min > 1){

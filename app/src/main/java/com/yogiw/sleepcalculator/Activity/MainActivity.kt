@@ -15,6 +15,7 @@ import com.yogiw.sleepcalculator.Helper.SettingPref
 import com.yogiw.sleepcalculator.Model.SettingList
 import com.yogiw.sleepcalculator.Model.TimeClass
 import kotlinx.android.synthetic.main.activity_main.*
+import java.sql.Time
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -47,20 +48,30 @@ class MainActivity : AppCompatActivity() {
         rbSleep.isChecked = true
 
         val currentTime: Calendar = Calendar.getInstance()
-        val hour = currentTime.get(Calendar.HOUR_OF_DAY)
+        var hour = currentTime.get(Calendar.HOUR_OF_DAY)
         val minute = currentTime.get(Calendar.MINUTE)
         time.Hour = hour
         time.Minute = minute
+        Log.i("timeskuyyy", " " + am)
+        if (am ==1){
+            if (hour > 12){
+                hour -= 12
+                tvTime.text = "${String.format("%02d", hour)}:${String.format("%02d", minute)} PM"
+            } else {
+                tvTime.text = "${String.format("%02d", hour)}:${String.format("%02d", minute)} AM"
+            }
+        } else {
+            tvTime.text = "${String.format("%02d", hour)}:${String.format("%02d", minute)}"
+        }
 
-        tvTime.text = "${String.format("%02d", hour)}:${String.format("%02d", minute)}"
-        adapter = TimeAdapter(this, listTime)
+        adapter = TimeAdapter(this, listTime, am)
         listTime.addAll(calculateWakeUp(time))
         adapter!!.notifyDataSetChanged()
         rvTime.adapter = adapter
         rvTime.layoutManager = LinearLayoutManager(this)
 
 
-        rbSleep.setOnClickListener { v ->
+        rbSleep.setOnClickListener {
             listTime.clear()
             if (rbSleep.isChecked == true) {
                 listTime.addAll(calculateWakeUp(time))
@@ -79,27 +90,8 @@ class MainActivity : AppCompatActivity() {
             adapter!!.notifyDataSetChanged()
         }
 
-        tvTime.setOnClickListener({ v ->
-            val mTimePicker: TimePickerDialog
-
-            mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
-                time.Hour = selectedHour
-                time.Minute = selectedMinute
-                listTime.clear()
-
-                if (rbSleep.isChecked == true) {
-                    listTime.addAll(calculateWakeUp(time))
-                    Log.i("isChecked", "" + true)
-                } else {
-                    listTime.addAll(calculateSleep(time))
-                    Log.i("isChecked", "" + false)
-
-                }
-                adapter!!.notifyDataSetChanged()
-                tvTime.text = "${String.format("%02d", selectedHour)}:${String.format("%02d", selectedMinute)}"
-            }, hour, minute, true)//Yes 24 hour time
-            mTimePicker.setTitle("Select Time")
-            mTimePicker.show()
+        tvTime.setOnClickListener({
+            setTimePicker(hour, minute)
         })
 
 
@@ -193,7 +185,82 @@ class MainActivity : AppCompatActivity() {
         } else {
             listTime.addAll(calculateSleep(time))
         }
-        adapter!!.notifyDataSetChanged()
+        adapter = TimeAdapter(applicationContext, listTime, am);
+        rvTime.adapter = adapter
+
+
+        val currentTime: Calendar = Calendar.getInstance()
+        var hour = currentTime.get(Calendar.HOUR_OF_DAY)
+        val minute = currentTime.get(Calendar.MINUTE)
+        time.Hour = hour
+        time.Minute = minute
+        Log.i("timeskuyyy", " " + am)
+        if (am ==1){
+            if (hour > 12){
+                hour -= 12
+                tvTime.text = "${String.format("%02d", hour)}:${String.format("%02d", minute)} PM"
+            } else {
+                tvTime.text = "${String.format("%02d", hour)}:${String.format("%02d", minute)} AM"
+            }
+        } else {
+            tvTime.text = "${String.format("%02d", hour)}:${String.format("%02d", minute)}"
+        }
+    }
+
+    fun setTimePicker(hour: Int, minute: Int){
+        val mTimePicker: TimePickerDialog
+
+        if (am ==1){
+            mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
+                time.Hour = selectedHour
+                time.Minute = selectedMinute
+                listTime.clear()
+
+                if (rbSleep.isChecked == true) {
+                    listTime.addAll(calculateWakeUp(time))
+                    Log.i("isChecked", "" + true)
+                } else {
+                    listTime.addAll(calculateSleep(time))
+                    Log.i("isChecked", "" + false)
+
+                }
+                adapter!!.notifyDataSetChanged()
+
+
+                var mHour = selectedHour
+                if (selectedHour > 12){
+                    mHour =  selectedHour - 12
+                    tvTime.text = "${String.format("%02d", mHour)}:${String.format("%02d", selectedMinute)} PM"
+                } else {
+                    tvTime.text = "${String.format("%02d", mHour)}:${String.format("%02d", selectedMinute)} AM"
+                }
+
+            }, hour, minute, false)//Yes 24 hour time
+            mTimePicker.setTitle("Select Time")
+            mTimePicker.show()
+        } else {
+            mTimePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
+                time.Hour = selectedHour
+                time.Minute = selectedMinute
+                listTime.clear()
+
+                if (rbSleep.isChecked == true) {
+                    listTime.addAll(calculateWakeUp(time))
+                    Log.i("isChecked", "" + true)
+                } else {
+                    listTime.addAll(calculateSleep(time))
+                    Log.i("isChecked", "" + false)
+
+                }
+                adapter!!.notifyDataSetChanged()
+
+                tvTime.text = "${String.format("%02d", selectedHour)}:${String.format("%02d", selectedMinute)}"
+
+
+            }, hour, minute, true)//Yes 24 hour time
+            mTimePicker.setTitle("Select Time")
+            mTimePicker.show()
+        }
     }
 
 }
